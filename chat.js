@@ -59,9 +59,14 @@ let isCamOff = false;
 let currentCallType = null;
 
 function initPeer() {
-    const masterId = 'MASTER-' + Math.floor(Math.random() * 10000);
+    const peerDisplay = document.getElementById('my-peer-id');
+    const masterId = 'MASTER-' + Math.floor(Math.random() * 100000); // 5 digit ID for lower collision chance
+
+    peerDisplay.innerText = "LINKING GARDEN...";
+
     // STUN servers help bypass NAT/Firewalls for cross-device (PC/Mobile) connectivity
     peer = new Peer(masterId, {
+        debug: 1,
         config: {
             'iceServers': [
                 { url: 'stun:stun.l.google.com:19302' },
@@ -73,8 +78,16 @@ function initPeer() {
         }
     });
 
+    // Timeout check: if it hangs on linking, show a hint
+    const initTimeout = setTimeout(() => {
+        if (peerDisplay.innerText === "LINKING GARDEN...") {
+            peerDisplay.innerHTML = "ID DELAYED. <span style='color:#ff5252; cursor:pointer' onclick='location.reload()'>RETRY?</span>";
+        }
+    }, 8000);
+
     peer.on('open', (id) => {
-        document.getElementById('my-peer-id').innerText = id;
+        clearTimeout(initTimeout);
+        peerDisplay.innerText = id;
         addMessage("SYSTEM", "YOUR GARDEN MASTER ID IS READY.");
     });
 
@@ -88,7 +101,19 @@ function initPeer() {
 
     peer.on('error', (err) => {
         console.error("Peer Error:", err);
-        addMessage("SYSTEM", "ERROR: " + err.type.toUpperCase());
+        peerDisplay.innerText = "ERROR-CODE: " + err.type.toUpperCase();
+        addMessage("SYSTEM", "CONNECTION ERROR: " + err.type.toUpperCase());
+
+        // Auto-retry on ID taken
+        if (err.type === 'unavailable-id') {
+            setTimeout(initPeer, 1000);
+        }
+    });
+
+    peer.on('disconnected', () => {
+        peerDisplay.innerText = "GARDEN DISCONNECTED";
+        addMessage("SYSTEM", "GARDEN SIGNAL LOST. RECONNECTING...");
+        peer.reconnect();
     });
 }
 
