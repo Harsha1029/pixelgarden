@@ -60,7 +60,18 @@ let currentCallType = null;
 
 function initPeer() {
     const masterId = 'MASTER-' + Math.floor(Math.random() * 10000);
-    peer = new Peer(masterId);
+    // STUN servers help bypass NAT/Firewalls for cross-device (PC/Mobile) connectivity
+    peer = new Peer(masterId, {
+        config: {
+            'iceServers': [
+                { url: 'stun:stun.l.google.com:19302' },
+                { url: 'stun:stun1.l.google.com:19302' },
+                { url: 'stun:stun2.l.google.com:19302' },
+                { url: 'stun:stun3.l.google.com:19302' },
+                { url: 'stun:stun4.l.google.com:19302' }
+            ]
+        }
+    });
 
     peer.on('open', (id) => {
         document.getElementById('my-peer-id').innerText = id;
@@ -434,7 +445,7 @@ function toggleScreen(screen) {
         drawScr.style.display = 'flex';
         resizeCanvases();
     } else {
-        chatScr.style.display = 'block';
+        chatScr.style.display = 'flex';
         drawScr.style.display = 'none';
     }
 }
