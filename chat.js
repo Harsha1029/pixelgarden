@@ -67,14 +67,17 @@ function initPeer() {
     // STUN servers help bypass NAT/Firewalls for cross-device (PC/Mobile) connectivity
     peer = new Peer(masterId, {
         debug: 1,
+        secure: true, // Force secure for production
         config: {
             'iceServers': [
                 { url: 'stun:stun.l.google.com:19302' },
                 { url: 'stun:stun1.l.google.com:19302' },
                 { url: 'stun:stun2.l.google.com:19302' },
                 { url: 'stun:stun3.l.google.com:19302' },
-                { url: 'stun:stun4.l.google.com:19302' }
-            ]
+                { url: 'stun:stun4.l.google.com:19302' },
+                { url: 'stun:stun.services.mozilla.com' } // Backup STUN
+            ],
+            'sdpSemantics': 'unified-plan'
         }
     });
 
@@ -174,8 +177,23 @@ connectBtn.onclick = () => {
     const targetId = targetInput.value.trim();
     if (!targetId) return;
 
-    addMessage("SYSTEM", "WAITING FOR MASTER...");
-    const connection = peer.connect(targetId);
+    if (targetId === peer.id) {
+        addMessage("SYSTEM", "⚠️ YOU CANNOT CONNECT TO YOURSELF!");
+        return;
+    }
+
+    addMessage("SYSTEM", `CONNECTING TO ${targetId}...`);
+
+    // Connect with reliable:true for better cross-network data transfer
+    const connection = peer.connect(targetId, {
+        reliable: true
+    });
+
+    connection.on('error', (err) => {
+        console.error("Connection Error:", err);
+        addMessage("SYSTEM", `❌ FAILED TO REACH ${targetId}. CHECK THE ID.`);
+    });
+
     setupConnection(connection);
 };
 
