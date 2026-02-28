@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIXEL GARDEN | CHAT & GAME</title>
+  <!-- Modern Pixel UI Support Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="icon" type="image/png" href="/assets/sprites/logo.png">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div id="game-container">
+    <!-- Main Landing Page -->
+    <div id="splash">
+      <!-- Navigation -->
+      <nav id="floating-nav">
+        <div class="nav-logo" style="display: flex; align-items: center; gap: 10px;">
+          <img src="/assets/sprites/logo.png" alt="Pixel Garden Logo" style="height: 40px; image-rendering: pixelated;">
+          <span>PIXEL GARDEN</span>
+        </div>
+        <div class="nav-links">
+          <a href="#features">FEATURES</a>
+          <a href="#characters">MASTERS</a>
+          <a href="#faq">GUIDE</a>
+          <a href="#reviews">REVIEWS</a>
+        </div>
+        <div class="nav-right">
+          <button class="pixel-btn purple small" id="nav-chat-btn"><i class="fa-solid fa-comments"></i> CHAT</button>
+          <button class="pixel-btn green small" id="nav-play-btn"><i class="fa-solid fa-play"></i> PLAY</button>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-section container">
+        <div class="hero-content">
+          <div class="hero-tag">NEW: COLLAB DRAWING UPDATED!</div>
+          <h1>WORLD'S FIRST PIXEL GARDEN CHAT</h1>
+          <p>Experience real-time P2P messaging, high-quality video calling, and collaborative canvas drawing in a
+            unique retro garden atmosphere. Collect rare blooms or chat with masters across the globe.</p>
+          <div class="hero-btns">
+            <button id="start-btn" class="pixel-btn green"><i class="fa-solid fa-gamepad"></i> START GAME</button>
+            <button class="pixel-btn blue" onclick="document.getElementById('features').scrollIntoView()"><i
+                class="fa-solid fa-circle-info"></i> EXPLORE</button>
+          </div>
+        </div>
+        <div class="video-demo">
+          <video autoplay muted loop playsinline poster="/assets/sprites/flower.png">
+            <source src="/assets/video/Recording 2026-02-27 145308.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+
+      <!-- Unique Features Grid -->
+      <section id="features" class="features-section container">
+        <div class="section-title">
+          <div class="hero-tag">CORE FEATURES</div>
+          <h2>MORE THAN JUST A GAME</h2>
+        </div>
+        <div class="features-grid">
+          <div class="feature-box">
+            <i class="fa-solid fa-video feature-icon" style="color: #9C27B0;"></i>
+            <h3>VIDEO & VOICE CALLS</h3>
+            <p>Crystal clear P2P calls without a server. Connect directly with your friends and see their garden in
+              real-time.</p>
+          </div>
+          <div class="feature-box">
+            <i class="fa-solid fa-pencil-ruler feature-icon" style="color: #2196F3;"></i>
+            <h3>COLLAB BOARD</h3>
+            <p>Draw together on a synchronized split-screen canvas. Every pixel you draw is mirrored instantly to your
+              friend.</p>
+          </div>
+          <div class="feature-box">
+            <i class="fa-solid fa-shield-halved feature-icon" style="color: #4CAF50;"></i>
+            <h3>MASTER PRIVACY</h3>
+            <p>Unique Master IDs ensure your connection is private. No data is stored on external servers—it's just pure
+              peer-to-peer logic.</p>
+          </div>
+          <div class="feature-box">
+            <i class="fa-solid fa-robot feature-icon" style="color: #FFEB3B;"></i>
+            <h3>AI RIVAL MASTERS</h3>
+            <p>Compete against complex AI agents in the garden. Collect rare flowers before they outsmart you in the
+              ultimate race.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Character Roster -->
+      <section id="characters" class="chars-section">
+        <div class="container">
+          <div class="section-title">
+            <h2>CHOOSE YOUR MASTER</h2>
+            <p style="font-size: 8px; margin-top: 15px; color: #777;">EVERY CHARACTER HAS A UNIQUE STORY IN THE GARDEN.
+            </p>
+          </div>
+          <div class="chars-grid">
+            <div class="char-card">
+              <img src="/assets/sprites/beauti.png" alt="Beauti">
+              <h3>BEAUTI</h3>
+            </div>
+            <div class="char-card">
+              <img src="/assets/sprites/buleburrey.png" alt="Blueburrey">
+              <h3>BLUEBURREY</h3>
+            </div>
+            <div class="char-card">
+              <img src="/assets/sprites/chumy.png" alt="Chumy">
+              <h3>CHUMY</h3>
+            </div>
+            <div class="char-card">
+              <img src="/assets/sprites/demoge.png" alt="Demoge">
+              <h3>DEMOGE</h3>
+            </div>
+            <div class="char-card">
+              <img src="/assets/sprites/fire.png" alt="Fire">
+              <h3>FIRE</h3>
+            </div>
+            <div class="char-card">
+              <img src="/assets/sprites/ice.png" alt="Ice">
+              <h3>ICE</h3>
+            </div>
+            <div class="char-card">
+              <img src="/assets/sprites/kime.png" alt="Kime">
+              <h3>KIME</h3>
+            </div>
+            <div class="char-card">
+              <img src="/assets/sprites/mark.png" alt="Mark">
+              <h3>MARK</h3>
+            </div>
+            <div class="char-card">
+              <img src="/assets/sprites/poppe.png" alt="Poppe">
+              <h3>POPPE</h3>
+            </div>
+            <div class="char-card">
+              <img src="/assets/sprites/chumy.png" alt="Gold" style="filter: sepia(1) saturate(10) brightness(1.2);">
+              <h3>CHUMY GOLD</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Guide / FAQ -->
+      <section id="faq" class="faq-section container">
+        <div class="section-title">
+          <h2>FREQUENTLY ASKED</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h4>HOW DO I CONNECT TO A FRIEND?</h4>
+            <p>Share your unique Master ID from the Chat Screen. Once your friend pastes it and clicks connect, you'll
+              be synced instantly for chatting, calling, and drawing.</p>
+          </div>
+          <div class="faq-item">
+            <h4>IS THE CALLING FREE?</h4>
+            <p>Yes! All calls are completely free. They happen directly between your browser and your friend's without
+              any extra fees.</p>
+          </div>
+          <div class="faq-item">
+            <h4>HOW DO I DRAW TOGETHER?</h4>
+            <p>Once you are "Online" with a friend, click the Blue Pencil button in the sidebar. This will instantly
+              take both of you to the Collaborative Board.</p>
+          </div>
+          <div class="faq-item">
+            <h4>CAN I SEND IMAGES AND STICKERS?</h4>
+            <p>Absolutely! Use the paperclip icon to attach images or videos, and the smiley face icon to choose from a
+              variety of garden-themed stickers.</p>
+          </div>
+          <div class="faq-item">
+            <h4>WHAT ARE GARDEN MASTERS?</h4>
+            <p>Garden Masters are the elite protectors of the pixel garden. You can choose from 10 unique masters, each
+              with their own legendary style.</p>
+          </div>
+          <div class="faq-item">
+            <h4>IS IT MOBILE FRIENDLY?</h4>
+            <p>Yes, the Pixel Garden is designed to work smoothly on both desktop and mobile browsers, so you can chat
+              and draw on the go!</p>
+          </div>
+          <div class="faq-item">
+            <h4>HOW IS MY CHAT DATA HANDLED?</h4>
+            <p>Your chat data is completely private. Since we use a direct peer-to-peer connection, your messages go
+              directly to your friend and are never stored on any central server.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section id="reviews" class="reviews-section container">
+        <div class="section-title">
+          <h2
+            style="color: white; border-bottom: 4px solid var(--accent-yellow); display: inline-block; padding-bottom: 20px;">
+            MASTERS FEEDBACK</h2>
+        </div>
+        <div class="reviews-grid">
+          <!-- TODO: ADD REVIEWS HERE -->
+        </div>
+      </section>
+
+      <!-- Modern Footer -->
+      <footer class="game-footer">
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-about">
+              <h4>PIXEL GARDEN</h4>
+              <p>A decentralized social hub and garden simulator built for the modern retro enthusiast. No central
+                servers, just you and your friends in a private digital garden.</p>
+            </div>
+            <div class="footer-links">
+              <h4>NAVIGATION</h4>
+              <ul>
+                <li><a href="#features">FEATURES</a></li>
+                <li><a href="#characters">MASTERS</a></li>
+                <li><a href="#faq">GUIDES</a></li>
+                <li><a href="chat.html">CHAT CENTER</a></li>
+              </ul>
+            </div>
+            <div class="footer-social">
+              <h4>COMMUNITY</h4>
+              <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fa-brands fa-discord"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            © 2026 PIXEL POOL STUDIOS | POWERED BY P2P WEBRTC | ALL RIGHTS RESERVED
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Auth Selection Screen -->
+    <div id="auth-screen" class="selection-screen" style="display: none;">
+      <div id="auth-card" class="auth-card">
+        <button class="auth-close" id="auth-close-btn"
+          style="position: absolute; top: 10px; right: 15px; border: none; background: none; font-size: 24px; cursor: pointer; color: #333;">&times;</button>
+        <div class="auth-toggle" style="display: flex; margin-bottom: 25px; border: 4px solid #333; background: #eee;">
+          <button id="toggle-signin" class="active"
+            style="flex: 1; padding: 12px; font-family: inherit; font-size: 10px; border: none; cursor: pointer;">SIGN
+            IN</button>
+          <button id="toggle-signup"
+            style="flex: 1; padding: 12px; font-family: inherit; font-size: 10px; border: none; cursor: pointer;">SIGN
+            UP</button>
+        </div>
+        <div class="auth-forms-container">
+          <form id="signin-form" class="auth-form active">
+            <h2 style="font-size: 12px; color: #333; margin-bottom: 20px; text-align: center;">AUTHENTICATE MASTER</h2>
+            <div class="input-group" style="margin-bottom: 15px;">
+              <label style="display: block; font-size: 6px; margin-bottom: 8px;">USERNAME</label>
+              <input type="text" placeholder="GARDEN NAME"
+                style="width: 100%; padding: 12px; border: 4px solid #333; font-family: inherit; font-size: 8px;">
+            </div>
+            <div class="input-group" style="margin-bottom: 25px;">
+              <label style="display: block; font-size: 6px; margin-bottom: 8px;">SECRET PASS</label>
+              <input type="password" placeholder="••••••••"
+                style="width: 100%; padding: 12px; border: 4px solid #333; font-family: inherit; font-size: 8px;">
+            </div>
+            <button type="button" id="fake-signin-btn" class="pixel-btn green" style="width: 100%;">START
+              ADVENTURE</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>

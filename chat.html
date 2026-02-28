@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXEL GARDEN | GLOBAL CHAT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="chat.css">
+</head>
+
+<body class="light-theme">
+    <div id="chat-container">
+        <!-- Main Chat Section -->
+        <div id="main-chat-screen" style="display: flex; flex-direction: column; flex: 1; min-height: 0;">
+            <!-- Header Section -->
+            <header id="chat-header">
+                <div class="header-left">
+                    <button id="back-btn" class="pixel-btn blue" onclick="location.href='index.html'">BACK</button>
+                    <div id="quotes-box">
+                        <span id="typewriter-text"></span><span class="cursor">|</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button id="theme-toggle" class="pixel-btn yellow">🌙 DARK</button>
+                </div>
+            </header>
+
+            <!-- Chat Area -->
+            <main id="chat-main">
+                <div id="chat-sidebar">
+                    <div class="your-id-box">
+                        <label>YOUR MASTER ID:</label>
+                        <div id="my-peer-id">CONNECTING...</div>
+                        <button id="copy-id-btn" class="pixel-btn small green">COPY</button>
+                    </div>
+                    <div class="connect-box">
+                        <input type="text" id="target-peer-id" placeholder="PASTE FRIEND'S ID">
+                        <button id="connect-btn" class="pixel-btn full-width purple">CONNECT MASTER</button>
+                    </div>
+                    <div id="status-badge" class="status-offline">OFFLINE</div>
+                    <button id="pencil-btn" class="pixel-btn full-width blue" style="margin-top: 10px;">
+                        <i class="fa-solid fa-pencil"></i> COLLAB DRAW
+                    </button>
+                </div>
+
+                <div id="chat-window">
+                    <div id="chat-window-header"
+                        style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 2px solid var(--border-color); background: rgba(0,0,0,0.05);">
+                        <div id="friend-status-info" style="font-size: 8px;">PRIVATE GARDEN</div>
+                        <div class="call-controls-mini">
+                            <button id="voice-call-btn" class="pixel-btn blue small" title="Voice Call" disabled><i
+                                    class="fa-solid fa-phone"></i></button>
+                            <button id="video-call-btn" class="pixel-btn purple small" title="Video Call" disabled><i
+                                    class="fa-solid fa-video"></i></button>
+                        </div>
+                    </div>
+                    <div id="messages-list">
+                        <div class="system-msg">READY FOR A PRIVATE GARDEN CONVERSATION. SHARE YOUR ID TO START.</div>
+                    </div>
+                    <div id="typing-indicator" style="display: none;">Friend is thinking...</div>
+                    <div id="reply-preview">
+                        <div class="reply-content">Replying to...</div>
+                        <span id="cancel-reply">✖</span>
+                    </div>
+                    <div id="chat-input-area">
+                        <input type="file" id="file-input" style="display: none;" accept="image/*,video/*">
+                        <button id="attach-btn" class="pixel-btn blue small" title="Attach Image/Video"><i
+                                class="fa-solid fa-paperclip"></i></button>
+                        <button id="sticker-btn" class="pixel-btn yellow small" title="Send Sticker"><i
+                                class="fa-solid fa-face-smile"></i></button>
+                        <input type="text" id="message-input" placeholder="TYPE A MESSAGE..." disabled>
+                        <button id="send-btn" class="pixel-btn green" disabled>SEND</button>
+                    </div>
+                    <!-- Sticker Picker -->
+                    <div id="sticker-picker" class="sticker-picker" style="display: none;">
+                        <div class="sticker-grid">
+                            <div class="sticker-item" data-sticker="flower.png">🌸</div>
+                            <div class="sticker-item" data-sticker="flower1.png">🌻</div>
+                            <div class="sticker-item" data-sticker="flower2.png">🌷</div>
+                            <div class="sticker-item" data-sticker="flower3.png">🌹</div>
+                            <div class="sticker-item" data-sticker="beauti.png">🎨</div>
+                            <div class="sticker-item" data-sticker="fire.png">🔥</div>
+                            <div class="sticker-item" data-sticker="ice.png">❄️</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call Overlay UI -->
+                <div id="call-overlay" class="call-overlay" style="display: none;">
+                    <div class="call-content">
+                        <div id="call-status">INCOMING CALL...</div>
+                        <div id="call-friend-id">MASTER FRIEND</div>
+
+                        <div id="video-container" style="display: none;">
+                            <video id="remote-video" autoplay playsinline></video>
+                            <video id="local-video" autoplay playsinline muted></video>
+                        </div>
+
+                        <div class="call-actions">
+                            <div id="incoming-actions" style="display: none;">
+                                <button id="accept-call-btn" class="pixel-btn green">ACCEPT</button>
+                                <button id="decline-call-btn" class="pixel-btn red">DECLINE</button>
+                            </div>
+                            <div id="active-actions" style="display: none;">
+                                <button id="mute-btn" class="pixel-btn yellow small" title="Mute/Unmute"><i
+                                        class="fa-solid fa-microphone"></i></button>
+                                <button id="toggle-cam-btn" class="pixel-btn blue small" title="Camera On/Off"><i
+                                        class="fa-solid fa-video"></i></button>
+                                <button id="end-call-btn" class="pixel-btn red">END</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Collab Draw Screen (SPA Style) -->
+        <div id="draw-screen" style="display: none; height: 100%; flex-direction: column; flex: 1; min-height: 0;">
+            <header id="draw-header"
+                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--border-color); padding-bottom: 20px;">
+                <div class="header-left" style="display: flex; align-items: center; gap: 30px;">
+                    <button id="draw-back-btn" class="pixel-btn blue"><i class="fa-solid fa-arrow-left"></i>
+                        BACK</button>
+                    <div class="header-title" style="font-size: 12px; color: var(--accent-purple);">COLLAB BOARD</div>
+                </div>
+            </header>
+
+            <main id="draw-main" style="display: flex; flex: 1; gap: 10px; padding-top: 20px; position: relative;">
+                <div id="left-panel" class="board-side"
+                    style="flex: 1; display: flex; flex-direction: column; gap: 10px; position: relative;">
+                    <div class="side-label"
+                        style="font-size: 8px; background: #000; color: var(--accent-yellow); padding: 5px 10px; align-self: flex-start;">
+                        YOU</div>
+                    <canvas id="local-canvas"
+                        style="flex: 1; background: #fdfdfd; border: 3px solid var(--border-color); box-shadow: 4px 4px 0 var(--shadow-color); cursor: crosshair;"></canvas>
+                    <div class="controls" style="display: flex; gap: 15px; align-items: center; margin-top: 10px;">
+                        <button id="clear-local" class="pixel-btn red small">CLEAR</button>
+                        <input type="color" id="local-color" value="#4CAF50">
+                    </div>
+                </div>
+
+                <div id="divider" style="width: 6px; background: var(--border-color); height: 100%;"></div>
+
+                <div id="right-panel" class="board-side"
+                    style="flex: 1; display: flex; flex-direction: column; gap: 10px; position: relative;">
+                    <div class="side-label"
+                        style="font-size: 8px; background: #000; color: var(--accent-yellow); padding: 5px 10px; align-self: flex-start;">
+                        FRIEND</div>
+                    <canvas id="remote-canvas"
+                        style="flex: 1; background: #fdfdfd; border: 3px solid var(--border-color); box-shadow: 4px 4px 0 var(--shadow-color);"></canvas>
+                    <div class="controls" style="display: flex; gap: 15px; align-items: center; margin-top: 10px;">
+                        <button disabled class="pixel-btn small grey">FRIEND'S SPACE</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Simple PeerJS library for very smooth P2P -->
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script src="chat.js"></script>
+</body>
+
+</html>

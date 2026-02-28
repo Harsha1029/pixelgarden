@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXEL FLOWER MASTERS | GAME</title>
+    <!-- Pixel Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="game.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <!-- Character Selection Screen -->
+        <div id="char-selection" class="selection-screen">
+            <div class="selection-box">
+                <h1>SELECT YOUR MASTER</h1>
+                <div class="char-picker-grid" id="char-picker-grid"></div>
+                <div class="selection-footer">
+                    <button id="char-next-btn" class="pixel-btn green" disabled>NEXT</button>
+                    <button id="exit-to-landing" class="pixel-btn blue">EXIT</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Game World -->
+        <div id="game-world">
+            <div id="map"></div>
+        </div>
+
+        <!-- UI Overlay -->
+        <div id="ui-layer" style="display: none;">
+            <!-- Mobile Joystick -->
+            <div id="joystick-container">
+                <div id="joystick-base">
+                    <div id="joystick-stick"></div>
+                </div>
+            </div>
+
+            <div class="hud-top-left">
+                <button id="exit-game-btn" class="pixel-btn blue exit-btn">EXIT</button>
+                <button id="settings-btn" class="pixel-btn yellow settings-btn">⚙️</button>
+            </div>
+            <div id="timer-display">TIME UNTIL VOTE: <span id="time-val">60</span>s</div>
+            <div id="leaderboard-mini">
+                <h3>TOP FLOWER COLLECTORS</h3>
+                <div id="mini-ranking"></div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="pixel-modal" style="display: none;">
+            <div class="modal-content settings-box">
+                <button class="close-x red" id="close-settings">×</button>
+                <h2 class="pixel-title">SETTINGS</h2>
+
+                <div class="setting-group">
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span class="icon">🎵</span>
+                            <span>MUSIC</span>
+                        </div>
+                        <div class="setting-controls">
+                            <label class="pixel-switch">
+                                <input type="checkbox" id="music-toggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <input type="range" id="music-volume" class="pixel-range" min="0" max="1" step="0.01"
+                                value="0.5">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span class="icon">🔊</span>
+                            <span>SOUNDS</span>
+                        </div>
+                        <div class="setting-controls">
+                            <label class="pixel-switch">
+                                <input type="checkbox" id="sound-toggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exit Confirmation Modal -->
+        <div id="exit-modal" class="pixel-modal" style="display: none;">
+            <div class="modal-content">
+                <h2>EXIT TO MENU?</h2>
+                <p style="font-size: 8px; margin: 15px 0; color: #666;">YOUR PROGRESS WILL BE LOST!</p>
+                <div class="modal-btns">
+                    <button id="exit-yes" class="pixel-btn green">YES</button>
+                    <button id="exit-no" class="pixel-btn blue">NO</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voting Screen -->
+        <div id="voting-screen" style="display: none;">
+            <div class="voting-container">
+                <h1>VOTING PHASE</h1>
+                <p id="voting-timer">TIME REMAINING: 60s</p>
+                <div id="voting-grid"></div>
+                <div class="voting-controls">
+                    <button id="skip-vote-btn" class="pixel-btn blue">SKIP VOTING</button>
+                </div>
+                <!-- Confirmation Modal -->
+                <div id="vote-confirm-modal" class="pixel-modal" style="display: none;">
+                    <div class="modal-content">
+                        <h2 id="confirm-text">VOTE FOR RED?</h2>
+                        <div class="modal-btns">
+                            <button id="confirm-yes" class="pixel-btn green">YES</button>
+                            <button id="confirm-no" class="pixel-btn blue">NO</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Elimination Result Screen -->
+                <div id="elimination-card" class="elimination-card" style="display: none;">
+                    <div class="card-inner">
+                        <h1 class="elim-header">PLAYER ELIMINATED</h1>
+                        <h2 id="elim-name">PLAYER NAME</h2>
+                        <div id="elim-sprite"></div>
+                        <p id="elim-text">WAS REMOVED FROM THE GARDEN</p>
+                    </div>
+                </div>
+                <!-- Tie Screen -->
+                <div id="tie-card" class="elimination-card" style="display: none; background: rgba(0, 50, 0, 0.9);">
+                    <div class="card-inner">
+                        <h2 style="color: #4CAF50;">TIE RESULT!</h2>
+                        <div style="font-size: 60px; margin: 20px;">🤝</div>
+                        <p>NO ONE ELIMINATED THIS ROUND</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Winner Celebration Screen -->
+        <div id="winner-screen" class="winner-overlay" style="display: none;">
+            <div class="confetti-container"></div>
+            <div class="winner-card">
+                <h1 class="bounce-text">GARDEN MASTER!</h1>
+                <div id="winner-sprite" class="happy-winner"></div>
+                <h2 id="winner-name">CHUMY GOLD</h2>
+                <p>THE ULTIMATE COLLECTOR</p>
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div id="leaderboard" style="display: none;">
+            <div class="leaderboard-box">
+                <h1>FINAL STANDINGS</h1>
+                <div id="ranking-list"></div>
+                <button class="pixel-btn green" onclick="location.href='index.html'">EXIT TO MENU</button>
+            </div>
+        </div>
+        <!-- Spectator Toast -->
+        <div id="spectator-toast" class="pixel-toast">YOU ARE ELIMINATED - CANNOT VOTE</div>
+    </div>
+    <script type="module" src="game.js"></script>
+</body>
+
+</html>

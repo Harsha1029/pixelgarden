@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXEL GARDEN | COLLAB BOARD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="draw.css">
+</head>
+
+<body class="light-theme">
+    <div id="draw-container">
+        <header id="draw-header">
+            <div class="header-left">
+                <button id="back-btn" class="pixel-btn blue"><i class="fa-solid fa-arrow-left"></i> BACK</button>
+                <div class="header-title">COLLAB BOARD</div>
+            </div>
+            <div class="header-right">
+                <div id="connection-status" class="status-badge offline">CONNECTING...</div>
+            </div>
+        </header>
+
+        <main id="draw-main">
+            <div id="left-panel" class="board-side">
+                <div class="side-label">YOU</div>
+                <canvas id="local-canvas"></canvas>
+                <div class="controls">
+                    <button id="clear-local" class="pixel-btn red small">CLEAR</button>
+                    <input type="color" id="local-color" value="#4CAF50">
+                </div>
+            </div>
+
+            <div id="divider"></div>
+
+            <div id="right-panel" class="board-side">
+                <div class="side-label">FRIEND</div>
+                <canvas id="remote-canvas"></canvas>
+                <div class="controls">
+                    <button disabled class="pixel-btn small grey">FRIEND'S SPACE</button>
+                    <div id="remote-color-indicator"
+                        style="width: 20px; height: 20px; border: 2px solid #333; background: #2196F3;"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script src="draw.js"></script>
+</body>
+
+</html>
